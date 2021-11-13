@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<h1>{{ header }}</h1>
+<p>{{ user }}</p>
+
+{% for product in products %}
+    {% if product.price > 5000 %}
+        <p>{{ product.name }} {{ product.price }}</p>
+    {% else %}
+        <p style="color:red;"> {{ product.name }} {{ product.price }}</p>
+    {% endif %}
+{% endfor %}
+
+
+</body>
+</html>
