@@ -9,7 +9,6 @@ window.onload = function () {
                 },
             });
         event.preventDefault()
-
     })
 
     $('.card_add_basket').on('click', 'button[type="button"]', function () {
