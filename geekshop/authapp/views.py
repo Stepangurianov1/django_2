@@ -52,14 +52,14 @@ def profile(request):
     if request.method == 'POST':
        form = UserProfilerForm(instance=request.user,data=request.POST,files=request.FILES)
        if form.is_valid():
+           messages.success(request, 'Вы успешно сохранили профайл')
            form.save()
        else:
-           print(form.errors)
-
+           messages.error(request, form.errors)
     context = {
         'title': 'Geekshop | Профайл',
         'form' : UserProfilerForm(instance=request.user),
-        'baskets': Basket.objects.filter(user=request.user)
+        'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', context)
 
