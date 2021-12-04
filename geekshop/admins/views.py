@@ -82,63 +82,6 @@ class UserDeleteView(DeleteView):
     def dispatch(self, request, *args, **kwargs):
         return super(UserDeleteView, self).dispatch(request, *args, **kwargs)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Category
 
 class CategoryListView(ListView,BaseClassContextMixin,CustomDispatchMixin):
@@ -153,7 +96,10 @@ class CategoryDeleteView(DeleteView,CustomDispatchMixin):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        self.object.is_active = False
+        if  self.object.is_active:
+            self.object.is_active = False
+        else:
+            self.object.is_active = True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
