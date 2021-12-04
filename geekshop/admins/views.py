@@ -13,7 +13,6 @@ from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import Product, ProductCategory
 
 
-
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
     return render(request, 'admins/admin.html')
@@ -118,7 +117,6 @@ class CategoryCreateView(CreateView,BaseClassContextMixin,CustomDispatchMixin):
     title = 'Админка | Создание категории'
 
 # Product
-
 class ProductListView(ListView,BaseClassContextMixin,CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-product-read.html'
