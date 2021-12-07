@@ -105,6 +105,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
+ugettext = lambda s: s
+
+LANGUAGES = (
+  ('en', ugettext('English')),
+  ('ru', ugettext('Russia')),
+)
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
