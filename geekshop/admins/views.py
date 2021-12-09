@@ -7,7 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView, DetailView, TemplateView
 
-from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryUpdateFormAdmin
+from admins.forms import UserAdminRegisterForm, UserAdminProfileForm, CategoryUpdateFormAdmin, ProductsForm
 from authapp.models import User
 from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 from mainapp.models import Product, ProductCategory
@@ -92,3 +92,29 @@ class ProductListView(ListView,BaseClassContextMixin,CustomDispatchMixin):
     def get_queryset(self):
         return Product.objects.all().select_related()
 
+class ProductsUpdateView(UpdateView, BaseClassContextMixin,CustomDispatchMixin):
+    model = Product
+    template_name = 'admins/admin-products-update-delete.html'
+    form_class = ProductsForm
+    title = 'Админка | Обновление продукта'
+    success_url = reverse_lazy('admins:admins_products')
+
+
+class ProductsCreateView(CreateView, BaseClassContextMixin,CustomDispatchMixin):
+    model = Product
+    template_name = 'admins/admin-products-create.html'
+    form_class = ProductsForm
+    title = 'Админка | Создание продукта'
+    success_url = reverse_lazy('admins:admins_products')
+
+
+
+class ProductsDeleteView(DeleteView, CustomDispatchMixin):
+    model = Product
+    template_name = 'admins/admin-product-read.html'
+    success_url = reverse_lazy('admins:admins_products')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False if self.object.is_active else True
+        self.object.save()
