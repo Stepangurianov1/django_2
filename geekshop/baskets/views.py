@@ -33,13 +33,10 @@ def basket_add(request,id):
             basket.save()
         else:
             Basket.objects.create(user=user_select,product=product,quantity=1)
-
         products = Product.objects.all()
         context = {'products': products}
         result = render_to_string('mainapp/includes/card.html', context)
         return JsonResponse({'result': result})
-
-
 
 @login_required
 def basket_remove(request,basket_id):

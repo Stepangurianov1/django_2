@@ -55,6 +55,13 @@ class CategoryListView(ListView,BaseClassContextMixin,CustomDispatchMixin):
     template_name = 'admins/admin-category-read.html'
     title = 'Админка | Список категорий'
 
+
+    def get_queryset(self):
+        if self.kwargs:
+           return ProductCategory.objects.filter(id=self.kwargs.get('pk'))
+        else:
+           return ProductCategory.objects.all()
+
 class CategoryDeleteView(DeleteView,BaseClassContextMixin,CustomDispatchMixin):
     model = ProductCategory
     template_name = 'admins/admin-category-update-delete.html'
