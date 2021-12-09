@@ -51,7 +51,7 @@ class CategoryUpdateFormAdmin(forms.ModelForm):
 
 class ProductsForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=ProductCategory.objects.all())
-    image = forms.ImageField(widget=forms.FileInput, required=False)
+    image = forms.ImageField(widget=forms.FileInput)
 
     class Meta:
         model = Product
