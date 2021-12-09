@@ -86,9 +86,6 @@ class ProductListView(ListView,BaseClassContextMixin,CustomDispatchMixin):
     template_name = 'admins/admin-product-read.html'
     title = 'Админка | Обновления категории'
 
-    def get_queryset(self):
-        return Product.objects.all().select_related()
-
 class ProductsUpdateView(UpdateView, BaseClassContextMixin,CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-products-update-delete.html'
@@ -96,15 +93,12 @@ class ProductsUpdateView(UpdateView, BaseClassContextMixin,CustomDispatchMixin):
     title = 'Админка | Обновление продукта'
     success_url = reverse_lazy('admins:admins_product')
 
-
 class ProductsCreateView(CreateView, BaseClassContextMixin,CustomDispatchMixin):
     model = Product
     template_name = 'admins/admin-products-create.html'
     form_class = ProductsForm
     title = 'Админка | Создание продукта'
     success_url = reverse_lazy('admins:admins_product')
-
-
 
 class ProductsDeleteView(DeleteView, CustomDispatchMixin):
     model = Product
