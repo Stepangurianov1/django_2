@@ -1,0 +1,3 @@
+[console_scripts]
+bookmarks2markdown = bookmarks2markdown.__main__:main
+
